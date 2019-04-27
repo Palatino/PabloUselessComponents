@@ -10,7 +10,7 @@ namespace PabloUselessComponents
         {
             get
             {
-                return "PabloUselessComponents";
+                return "Useless Components";
             }
         }
         public override Bitmap Icon
@@ -26,7 +26,7 @@ namespace PabloUselessComponents
             get
             {
                 //Return a short string describing the purpose of this GHA library.
-                return "";
+                return "Explore Grasshopper API";
             }
         }
         public override Guid Id
@@ -42,7 +42,7 @@ namespace PabloUselessComponents
             get
             {
                 //Return a string identifying you or your company.
-                return "";
+                return "Pablo Alvarez - 2019";
             }
         }
         public override string AuthorContact
@@ -50,7 +50,7 @@ namespace PabloUselessComponents
             get
             {
                 //Return a string representing your preferred contact details.
-                return "";
+                return "www.linkedin.com/in/palvarezrio";
             }
         }
     }

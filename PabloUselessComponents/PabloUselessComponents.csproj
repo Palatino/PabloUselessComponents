@@ -56,7 +56,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PabloUselessComponentsComponent.cs" />
+    <Compile Include="CountNodes.cs" />
+    <Compile Include="Helpers.cs" />
+    <Compile Include="MoveComponents.cs" />
     <Compile Include="PabloUselessComponentsInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -69,7 +71,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>Copy "$(TargetPath)" "$(TargetDir)$(ProjectName).gha"
+    <PostBuildEvent>Copy "$(TargetPath)" "C:\Users\ppaab\AppData\Roaming\Grasshopper\Libraries\UselessComponents.gha"
 Erase "$(TargetPath)"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
