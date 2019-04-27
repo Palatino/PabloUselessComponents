@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CountNodes.cs" />
+    <Compile Include="GroupAll.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="MoveComponents.cs" />
     <Compile Include="PabloUselessComponentsInfo.cs" />

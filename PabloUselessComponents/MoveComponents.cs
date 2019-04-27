@@ -41,9 +41,15 @@ namespace PabloUselessComponents
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
+            //Get imput curve
             Curve refCurve = null;
             DA.GetData(0, ref refCurve);
+
+            //Get document
+
             docu = this.OnPingDocument();
+
+            //Add all components to a new list and then filter to only selected elements
             List<IGH_DocumentObject> objects = new List<IGH_DocumentObject>();
             try
             {
@@ -56,10 +62,17 @@ namespace PabloUselessComponents
 
             }
 
+
+            //If more than one component are selected run main logic
+
             if (objects.Count > 1)
             {
 
                 int elements = objects.Count();
+
+                //Get max and min coordinates of the existing components, this values will be used to remap 
+                // the points from the input curve
+
                 float minX = objects[0].Attributes.Pivot.X;
                 float maxX = objects[0].Attributes.Pivot.X;
                 float minY = objects[0].Attributes.Pivot.Y;
@@ -79,6 +92,8 @@ namespace PabloUselessComponents
 
                 }
 
+
+                //Only max amplitude (x or y) will be used to remap curve
                 float xAmplitude = Math.Abs(minX - maxX);
                 float yAmplitude = Math.Abs(minY - maxY);
 
@@ -98,6 +113,8 @@ namespace PabloUselessComponents
 
                 }
 
+
+                //Get points along input curve
                 refCurve.Domain = new Interval(0, 1);
                 List<double> parameters = new List<double>();
                 for (double i = 0; i < 1; i += 1.0 / elements)
@@ -112,7 +129,7 @@ namespace PabloUselessComponents
                 List<double> Xs = new List<double>();
                 List<double> Ys = new List<double>();
 
-
+                //Add coordinates of the points
                 foreach (double param in parameters)
                 {
                     Point3d pt = refCurve.PointAt(param);
@@ -128,6 +145,7 @@ namespace PabloUselessComponents
                 double minFY = Ys.Min();
                 double maxFY = Ys.Max();
 
+                //Remap values to the domain extracted from the components coordinates
                 foreach (double x in Xs)
                 {
                     mappedXs.Add(x.Remap(minFX, maxFX, minMapping, maxMapping));
@@ -137,6 +155,9 @@ namespace PabloUselessComponents
                 {
                     mappedYs.Add(y.Remap(minFY, maxFY, maxMapping, minMapping));
                 }
+
+
+                //Set the coordiantes of the components
 
                 for (int i = 0; i < objects.Count(); i++)
                 {

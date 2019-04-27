@@ -3,21 +3,20 @@ using System.Collections.Generic;
 
 using Grasshopper.Kernel;
 using Rhino.Geometry;
-using System.Timers;
+using System.Linq;
 
 namespace PabloUselessComponents
 {
-    public class Number_Components : GH_Component
+    public class GroupAll : GH_Component
     {
         /// <summary>
-        /// Initializes a new instance of the Number_Components class.
+        /// Initializes a new instance of the GroupAll class.
         /// </summary>
-        public GH_Document docu;
-        public int counter = 0;
 
-        public Number_Components()
-          : base("Number of Components", "N Comp.",
-              "Count number of components in document",
+        public GH_Document docu;
+        public GroupAll()
+          : base("GroupAll", "Group All",
+              "Description",
               "Useless Components", "Components")
         {
         }
@@ -34,7 +33,6 @@ namespace PabloUselessComponents
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddIntegerParameter("Number of componentes", "Num. Comp", "Number of components", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -42,31 +40,28 @@ namespace PabloUselessComponents
         /// </summary>
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
-        {
-            //Get the document if it is not null
-            if (docu == null)
-            {
-                docu = Grasshopper.Instances.ActiveCanvas.Document;
-            }
-
-
-            //Subscribe to events Added and Deleted
-
+        { 
+            docu = this.OnPingDocument();
+            List<IGH_DocumentObject> objects = new List<IGH_DocumentObject>();
             try
             {
-                docu.ObjectsAdded -= OnChanged;
-                docu.ObjectsAdded += OnChanged;
-                docu.ObjectsDeleted -= OnChanged;
-                docu.ObjectsDeleted += OnChanged;
+                objects = docu.Objects.ToList<IGH_DocumentObject>();
             }
-
             catch { }
 
-            //Get document property and add it to the output
-            int num_comp = docu.ObjectCount;
-            DA.SetData(0, num_comp);
+            objects.Remove(this);
 
+            Grasshopper.Kernel.Special.GH_Group group = new Grasshopper.Kernel.Special.GH_Group();
+            group.Colour = System.Drawing.Color.AliceBlue;
+            docu.AddObject(group, false, docu.ObjectCount);
 
+            foreach ( IGH_DocumentObject obj in objects)
+            {
+                group.AddObject(obj.Attributes.InstanceGuid);
+          
+            }
+
+            group.ExpireCaches();
 
         }
 
@@ -88,14 +83,7 @@ namespace PabloUselessComponents
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("1766b25a-ac50-4fe8-b14f-bff2deb8b7b0"); }
+            get { return new Guid("ec485bf2-fc15-4502-8f90-15d3e035b27a"); }
         }
-
-        //Event handler that will be expire the solution whenever a component is added or deleted
-        public void OnChanged(Object sender, GH_DocObjectEventArgs e)
-        {
-            ExpireSolution(true);
-        }
-
     }
 }
