@@ -11,8 +11,8 @@ public static class Helpers
     {
         return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
     }
-
-    public static void UpStreamObjects(List<IGH_DocumentObject> upComponents , IGH_DocumentObject obj, GH_Document docu)
+    
+    public static void UpStreamObjects(HashSet<IGH_DocumentObject> upComponents , IGH_DocumentObject obj, GH_Document docu)
     {
         //Find all the upstream components from a given starting node.
 
@@ -20,11 +20,17 @@ public static class Helpers
         IGH_Param param = obj as IGH_Param;
         if (param != null)
         {
-            upComponents.Add(obj);
+            if (!upComponents.Contains(obj))
+            {
+                upComponents.Add(obj);
+            }
+
             IList<IGH_Param> params2 = param.Sources;
             foreach (IGH_Param p in params2)
             {
-                IGH_ActiveObject PA = p as IGH_ActiveObject;
+                Guid id =  p.Attributes.GetTopLevel.InstanceGuid;
+                IGH_DocumentObject comp2 = docu.FindObject(id, true);
+                IGH_ActiveObject PA = comp2 as IGH_ActiveObject;
                 UpStreamObjects(upComponents, PA, docu);
             }
 
@@ -57,12 +63,18 @@ public static class Helpers
 
             if (PreviousComponents.Count == 0)
             {
-                upComponents.Add(obj);
+
+  
             }
 
             else
             {
-                upComponents.Add(obj);
+                if (!upComponents.Contains(obj))
+                {
+                    upComponents.Add(obj);
+                }
+
+
                 foreach (IGH_DocumentObject obj3 in PreviousComponents)
                 {
                     UpStreamObjects(upComponents, obj3, docu);

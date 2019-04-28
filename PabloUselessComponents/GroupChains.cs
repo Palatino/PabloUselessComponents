@@ -87,7 +87,7 @@ namespace PabloUselessComponents
                 {
                     IGH_ActiveObject lastElement = downObjects[downObjects.Count - 1];
 
-                    List<IGH_DocumentObject> upstream = new List<IGH_DocumentObject>();
+                    HashSet<IGH_DocumentObject> upstream = new HashSet<IGH_DocumentObject>();
                     Helpers.UpStreamObjects(upstream, lastElement, docu);
                     foreach (GH_DocumentObject ob in upstream)
                     {
@@ -108,14 +108,16 @@ namespace PabloUselessComponents
             }
 
             //Group each of the chains
-
-            foreach(List<IGH_ActiveObject>chain in chains)
+            int counter = 1;
+            Random random = new Random();
+            foreach (List<IGH_ActiveObject>chain in chains)
             {
+                
+                Grasshopper.Kernel.Special.GH_Group group = new Grasshopper.Kernel.Special.GH_Group();
 
-                Grasshopper.Kernel.Special.GH_Group group = new Grasshopper.Kernel.Special.GH_Group
-                {
-                    Colour = System.Drawing.Color.AliceBlue
-                };
+                group.Colour = System.Drawing.Color.FromArgb(200, (int)(random.NextDouble() * 255), (int)(random.NextDouble() * 255), (int)(random.NextDouble() * 255));
+                group.Name = string.Format(("Chain {0}"), counter.ToString());
+                group.NickName = string.Format(("Chain {0}"), counter.ToString());
                 docu.AddObject(group, false, docu.ObjectCount);
 
                 foreach (IGH_ActiveObject obj in chain)
@@ -125,7 +127,7 @@ namespace PabloUselessComponents
                 }
 
                 group.ExpireCaches();
-
+                counter += 1;
             }
 
 
