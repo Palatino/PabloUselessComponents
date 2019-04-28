@@ -14,6 +14,9 @@ public static class Helpers
 
     public static void UpStreamObjects(List<IGH_DocumentObject> upComponents , IGH_DocumentObject obj, GH_Document docu)
     {
+        //Find all the upstream components from a given starting node.
+
+
         IGH_Param param = obj as IGH_Param;
         if (param != null)
         {

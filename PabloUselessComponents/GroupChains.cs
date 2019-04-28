@@ -74,14 +74,15 @@ namespace PabloUselessComponents
                 IGH_ActiveObject obj = activeObjects[0];
 
 
-                //Retrieve all the components downstream and retrieve last elements, once the last elements is found 
+                //Retrieve all the components downstream and get last elements, once the last elements is found 
                 //all the upstream elements will be colected from here
                 List<IGH_ActiveObject> downObjects = docu.FindAllDownstreamObjects(obj);
                 downObjects.Insert(0, obj);
 
 
 
-                //Retrieve all the component upstream
+                //Retrieve all the component upstream from the last element, this process is repeated until 
+                // all the downstream elements have been added to the chain.
                 while (downObjects.Count != 0)
                 {
                     IGH_ActiveObject lastElement = downObjects[downObjects.Count - 1];
