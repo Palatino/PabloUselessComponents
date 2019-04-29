@@ -12,7 +12,7 @@ public static class Helpers
         return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
     }
     
-    public static void UpStreamObjects(HashSet<IGH_DocumentObject> upComponents , IGH_DocumentObject obj, GH_Document docu)
+    public static void UpStreamObjects(List<IGH_DocumentObject> upComponents , IGH_DocumentObject obj, GH_Document docu)
     {
         //Find all the upstream components from a given starting node.
 
@@ -63,8 +63,11 @@ public static class Helpers
 
             if (PreviousComponents.Count == 0)
             {
+                if (!upComponents.Contains(obj))
+                {
+                    upComponents.Add(obj);
+                }
 
-  
             }
 
             else

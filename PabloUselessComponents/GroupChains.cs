@@ -39,8 +39,13 @@ namespace PabloUselessComponents
         /// This is the method that actually does the work.
         /// </summary>
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
+        /// 
+
+
         protected override void SolveInstance(IGH_DataAccess DA)
-        { 
+        {   ///The logic for finding the different chains is far from perfect
+
+
             docu = this.OnPingDocument();
 
             //Get al components in the document
@@ -69,11 +74,13 @@ namespace PabloUselessComponents
 
             while (activeObjects.Count > 0)
             {
-                //Start with the first document of the list
-                List<IGH_ActiveObject> chain = new List<IGH_ActiveObject>();
+                //Start with the first document of the list, from there try to get to the leftmost component and once
+                // there run FindAllDwonstream to try to capture as many components as posible
+
                 IGH_ActiveObject obj = activeObjects[0];
-
-
+                List<IGH_ActiveObject> chain = new List<IGH_ActiveObject>();
+                //List<IGH_DocumentObject> longest_set = new List<IGH_DocumentObject>();
+                
                 //Retrieve all the components downstream and get last elements, once the last elements is found 
                 //all the upstream elements will be colected from here
                 List<IGH_ActiveObject> downObjects = docu.FindAllDownstreamObjects(obj);
@@ -87,17 +94,17 @@ namespace PabloUselessComponents
                 {
                     IGH_ActiveObject lastElement = downObjects[downObjects.Count - 1];
 
-                    HashSet<IGH_DocumentObject> upstream = new HashSet<IGH_DocumentObject>();
+                    List<IGH_DocumentObject> upstream = new List<IGH_DocumentObject>();
                     Helpers.UpStreamObjects(upstream, lastElement, docu);
                     foreach (GH_DocumentObject ob in upstream)
                     {
-                        
+
                         IGH_ActiveObject ob_Active = ob as IGH_ActiveObject;
                         downObjects.Remove(ob_Active);
                         activeObjects.Remove(ob_Active);
                         if (!chain.Contains(ob_Active))
                         { chain.Add(ob_Active); }
-                        
+
                     }
 
 
@@ -107,6 +114,68 @@ namespace PabloUselessComponents
                 chains.Add(chain);
             }
 
+            //Previous logic is quite shitty and you may still end up with two chains which are not totally independant, 
+            //To fix this chains are compared to see if any component if common to both, if that happend both chains are merged.
+            //List<List<IGH_ActiveObject>> cleanChains = new List<List<IGH_ActiveObject>>();
+
+            List<List<IGH_ActiveObject>> cleanChains = new List<List<IGH_ActiveObject>>();
+
+            //while (chains.Count > 0)
+            //{
+            //    List<IGH_ActiveObject> checkingChain = chains[0];
+            //    foreach(List<IGH_ActiveObject> otherChain in chains.ToList<IGH_ActiveObject>())
+            //    {
+            //        if(otherChain != checkingChain)
+            //        {
+            //            if(checkingChain.Intersect(otherChain).Any())
+            //            {
+            //                foreach(IGH_ActiveObject chainObj in otherChain)
+            //                {
+            //                    if (!checkingChain.Contains(chainObj))
+            //                    {
+            //                        checkingChain.Add(chainObj);
+            //                    }
+            //                    chains.Remove(otherChain);
+            //                    break;
+            //                }
+            //            }
+            //        }
+            //    }
+            //    cleanChains.Add(checkingChain);
+            //    chains.Remove(checkingChain);
+            //}
+            while (chains.Count > 0)
+            {
+                bool flag = true;
+                List<IGH_ActiveObject> checkingChain = chains[0];
+                for(int i = 1; i<chains.Count; i++)
+                {
+                    List<IGH_ActiveObject> otherChain = chains[i];
+                    if (checkingChain.Intersect(otherChain).Any())
+                    {
+                        flag = false;
+                        foreach (IGH_ActiveObject chainObj in otherChain)
+                        {
+                            if (!checkingChain.Contains(chainObj))
+                            {
+                                checkingChain.Add(chainObj);
+                            }
+                            chains.Remove(otherChain);
+                           
+                        }
+                        break;
+                    }
+                }
+
+                if (flag)
+                {
+                    cleanChains.Add(checkingChain);
+                    chains.Remove(checkingChain);
+
+                }
+            }
+
+            chains = cleanChains;
             //Group each of the chains
             int counter = 1;
             Random random = new Random();
