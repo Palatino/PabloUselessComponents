@@ -74,8 +74,7 @@ namespace PabloUselessComponents
 
             while (activeObjects.Count > 0)
             {
-                //Start with the first document of the list, from there try to get to the leftmost component and once
-                // there run FindAllDwonstream to try to capture as many components as posible
+                //Start with the first document of the list
 
                 IGH_ActiveObject obj = activeObjects[0];
                 List<IGH_ActiveObject> chain = new List<IGH_ActiveObject>();
@@ -120,30 +119,6 @@ namespace PabloUselessComponents
 
             List<List<IGH_ActiveObject>> cleanChains = new List<List<IGH_ActiveObject>>();
 
-            //while (chains.Count > 0)
-            //{
-            //    List<IGH_ActiveObject> checkingChain = chains[0];
-            //    foreach(List<IGH_ActiveObject> otherChain in chains.ToList<IGH_ActiveObject>())
-            //    {
-            //        if(otherChain != checkingChain)
-            //        {
-            //            if(checkingChain.Intersect(otherChain).Any())
-            //            {
-            //                foreach(IGH_ActiveObject chainObj in otherChain)
-            //                {
-            //                    if (!checkingChain.Contains(chainObj))
-            //                    {
-            //                        checkingChain.Add(chainObj);
-            //                    }
-            //                    chains.Remove(otherChain);
-            //                    break;
-            //                }
-            //            }
-            //        }
-            //    }
-            //    cleanChains.Add(checkingChain);
-            //    chains.Remove(checkingChain);
-            //}
             while (chains.Count > 0)
             {
                 bool flag = true;

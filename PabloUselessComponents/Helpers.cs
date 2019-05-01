@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Grasshopper.Kernel;
 using Rhino.Geometry;
 using System.Linq;
+using System.Drawing;
 
 public static class Helpers
 {
@@ -92,4 +93,70 @@ public static class Helpers
 
 
     }
+
+    public static Color RGBFromHSV(double hue, double saturation, double value)
+    {
+
+        //The ranges are 0 - 360 for hue, and 0 - 1 for saturation or value.
+
+        int hi = Convert.ToInt32(Math.Floor(hue / 60)) % 6;
+        double f = hue / 60 - Math.Floor(hue / 60);
+
+        value = value * 255;
+        int v = Convert.ToInt32(value);
+        int p = Convert.ToInt32(value * (1 - saturation));
+        int q = Convert.ToInt32(value * (1 - f * saturation));
+        int t = Convert.ToInt32(value * (1 - (1 - f) * saturation));
+
+        if (hi == 0)
+            return Color.FromArgb(255, v, t, p);
+        else if (hi == 1)
+            return Color.FromArgb(255, q, v, p);
+        else if (hi == 2)
+            return Color.FromArgb(255, p, v, t);
+        else if (hi == 3)
+            return Color.FromArgb(255, p, q, v);
+        else if (hi == 4)
+            return Color.FromArgb(255, t, p, v);
+        else
+            return Color.FromArgb(255, v, p, q);
+    }
+
+    public static void RGBToHSV(int r, int g, int b, out double out_h, out double out_s, out double out_v)
+    {
+        double delta, min;
+        double h = 0, s, v;
+
+        min = Math.Min(Math.Min(r, g), b);
+        v = Math.Max(Math.Max(r, g), b);
+        delta = v - min;
+
+        if (v == 0.0)
+            s = 0;
+        else
+            s = delta / v;
+
+        if (s == 0)
+            h = 0.0;
+
+        else
+        {
+            if (r == v)
+                h = (g - b) / delta;
+            else if (g == v)
+                h = 2 + (b - r) / delta;
+            else if (b == v)
+                h = 4 + (r - g) / delta;
+
+            h *= 60;
+
+            if (h < 0.0)
+                h = h + 360;
+        }
+
+        out_h = h;
+        out_v = v/255;
+        out_s = s;
+    }
+
 }
