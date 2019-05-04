@@ -118,10 +118,40 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Chains" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Chains.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Cubensis" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Cubensis.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Cubensis2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Cubensis2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DVD" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DVD.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DVD2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DVD2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DVD3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DVD3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DVD4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DVD4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DVD5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DVD5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DVD6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DVD6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DVD7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DVD7.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Move_Components" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Move_Components.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Number_Components" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Number_Components.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

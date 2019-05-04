@@ -63,6 +63,16 @@ namespace PabloUselessComponents.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Chains {
+            get {
+                object obj = ResourceManager.GetObject("Chains", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Cubensis {
             get {
                 object obj = ResourceManager.GetObject("Cubensis", resourceCulture);
@@ -76,6 +86,96 @@ namespace PabloUselessComponents.Properties {
         internal static System.Drawing.Bitmap Cubensis2 {
             get {
                 object obj = ResourceManager.GetObject("Cubensis2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DVD {
+            get {
+                object obj = ResourceManager.GetObject("DVD", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DVD2 {
+            get {
+                object obj = ResourceManager.GetObject("DVD2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DVD3 {
+            get {
+                object obj = ResourceManager.GetObject("DVD3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DVD4 {
+            get {
+                object obj = ResourceManager.GetObject("DVD4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DVD5 {
+            get {
+                object obj = ResourceManager.GetObject("DVD5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DVD6 {
+            get {
+                object obj = ResourceManager.GetObject("DVD6", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DVD7 {
+            get {
+                object obj = ResourceManager.GetObject("DVD7", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Move_Components {
+            get {
+                object obj = ResourceManager.GetObject("Move_Components", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Number_Components {
+            get {
+                object obj = ResourceManager.GetObject("Number_Components", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
